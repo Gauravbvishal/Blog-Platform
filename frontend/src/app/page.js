@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +11,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+
+ 
   async function loginPage(e) {
     e.preventDefault();
     setLoading(true);
@@ -21,7 +24,7 @@ export default function Home() {
       });
       const data1 = await response.json();
       console.log(data1);
-      setMessage(data1?.message || "Something went wrong!");
+      setMessage(data1?.message || " ");
 
       if (data1.success) {
         setEmail("");
@@ -47,11 +50,10 @@ export default function Home() {
 
             {message && (
               <p
-                className={`text-sm font-medium ${
-                  message.toLowerCase().includes("success")
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
+                className={`text-sm font-medium ${message.toLowerCase().includes("success")
+                  ? "text-green-600"
+                  : "text-red-600"
+                  }`}
               >
                 {message}
               </p>
@@ -122,7 +124,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full border text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 {loading ? "Signing in..." : "Sign in"}
               </button>

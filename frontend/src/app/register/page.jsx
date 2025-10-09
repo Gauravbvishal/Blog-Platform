@@ -1,31 +1,37 @@
 "use client"
 import { useState } from "react";
+import { useSearchParams } from 'next/navigation';
+
 export default function Signupform() {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
-    const[data,setData]=useState([]);
-    async function signupform(e){
+    const [data, setData] = useState([]);
+    async function signupform(e) {
         e.preventDefault();
-        try{
-        const response = await fetch('http://localhost:8000/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name,email,password })
-        });
-       const data=await response.json();
-       console.log(data)
-       setData(data.message);//show message when user already registered 
-       setname('');
-       setemail('');
-       setpassword(''); 
-        
-    }
-    catch(err){
-        console.err(err);
-    }
+        try {
+            const response = await fetch('http://localhost:8000/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            const searchParams = useSearchParams();
+            const query = searchParams.get('query');
+            consstant.log(query)
+            const data = await response.json();
+            console.log(data)
+            setData(data.message);//show message when user already registered 
+            setname('');
+            setemail('');
+            setpassword('');
+
+        }
+        catch (err) {
+            console.err(err);
+        }
     }
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -41,15 +47,15 @@ export default function Signupform() {
 
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input type="text" name="name" id="name" value={name} onChange={(e) =>setname(e.target.value)} placeholder="enter your name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input type="text" name="name" id="name" value={name} onChange={(e) => setname(e.target.value)} placeholder="enter your name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input type="email" name="email" id="email" value={email} onChange={(e) =>setemail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
+                                <input type="email" name="email" id="email" value={email} onChange={(e) => setemail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" name="password" id="password" value={password} onChange={(e) =>setpassword(e.target.value)} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                                <input type="password" name="password" id="password" value={password} onChange={(e) => setpassword(e.target.value)} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                             </div>
 
                             <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 border">Create an account</button>
