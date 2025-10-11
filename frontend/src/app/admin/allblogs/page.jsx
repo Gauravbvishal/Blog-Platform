@@ -30,6 +30,11 @@ export default function BlogPage() {
         }
     }
 
+    async function editBlog(id){
+        const response=await fetch(`http://localhost:8000/blog/edit/${id}`);
+        
+    }
+
 
     return (
         <div className="p-6">
