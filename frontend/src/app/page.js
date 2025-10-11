@@ -11,8 +11,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-
- 
   async function loginPage(e) {
     e.preventDefault();
     setLoading(true);

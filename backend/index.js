@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+require("dotenv").config();
+
 const cors = require('cors');
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json());
