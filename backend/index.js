@@ -6,16 +6,17 @@ const app = express();
 
 const cors = require('cors');
 app.use(cors()); // This enables CORS for all routes
-
-const authroutes=require('./routes/auth')
-const User = require("./models/user");
-
-
-
 app.use(express.json());
 
-app.use(authroutes);
+const authroutes=require('./routes/user/auth')
+const blogroutes=require('./routes/user/blog')
+const adminRoutes=require('./routes/admin/blogPermission')
+const User = require("./models/user");
+const blog = require("./models/blog");
 
+app.use(authroutes);
+app.use(blogroutes)
+app.use(adminRoutes)
 //Connecting to the database
 mongoose
     .connect("mongodb+srv://vishalgaurav985_db_user:vishal985@cluster0.b3d76sp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")

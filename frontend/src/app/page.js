@@ -29,7 +29,7 @@ export default function Home() {
       if (data1.success) {
         setEmail("");
         setPassword("");
-        router.push("/mainPage");
+        router.push("/users/mainPage");
       }
     } catch (err) {
       console.error(err);

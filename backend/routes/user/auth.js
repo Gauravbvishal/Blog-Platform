@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
+const User = require("../../models/user");
 
 // 🧂 A secret key should always be in .env file, not hardcoded
 const JWT_SECRET = process.env.JWT_SECRET || "secretkeyappearshere";

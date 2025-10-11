@@ -25,7 +25,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 
-        {!['/', '/register'].includes(pathname) && <Headers />}
+       {!['/', '/register'].includes(pathname) && !pathname.startsWith('/admin') && <Headers />}
+
         <main>
           {children}
         </main>

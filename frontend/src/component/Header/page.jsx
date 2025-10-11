@@ -11,8 +11,8 @@ export default function Headers() {
                 className='rounded'
             />
             <ul className='flex gap-6 m-2'>
-                <li><Link href="/">Home</Link></li>
-                <li> <Link href="/about">About</Link></li>
+                <li><Link href="/users/mainPage">Create Blog</Link></li>
+                <li> <Link href="/users/blogs">All Blogs</Link></li>
                 <li> <Link href="/">Logout</Link></li>
             </ul>
         </div>
