@@ -1,9 +1,14 @@
-const express=require('express');
-const router=express.Router();
-const adminController=require('../../controllers/admin')
+const express = require('express');
+const router = express.Router();
+const adminController = require('../../controllers/admin');
 
+// Delete a blog
+router.delete('/blog/delete/:id', adminController.adminPermission);
 
-router.use('/blog/delete/:id',adminController.adminPermission);
-router.use('/blog/edit/:id',adminController.editBlog);
+// Get a blog by ID (for editing)
+router.get('/blog/edit/:id', adminController.editBlog);
 
-module.exports=router;
+// Update a blog
+router.put('/blog/edit/:id', adminController.editBlogs);
+
+module.exports = router;
