@@ -8,10 +8,9 @@ export default function BlogPage() {
   const [blogDate, setBlogDate] = useState("");
   const [content, setContent] = useState("");
   const [categories, setCategories] = useState("");
-  const [editId, setEditId] = useState(null); // track which blog is being edited
+  const [editId, setEditId] = useState(null); 
   const [showModal, setShowModal] = useState(false);
 
-  // Fetch all blogs
   async function allBlogs() {
     try {
       const response = await fetch("http://localhost:8000/blogshow");
@@ -26,7 +25,6 @@ export default function BlogPage() {
     allBlogs();
   }, []);
 
-  // Delete blog
   async function deleteBlog(id) {
     try {
       await fetch(`http://localhost:8000/blog/delete/${id}`, { method: "DELETE" });
@@ -36,7 +34,6 @@ export default function BlogPage() {
     }
   }
 
-  // Load blog data into form for editing
   async function editBlog(id) {
     try {
       const response = await fetch(`http://localhost:8000/blog/edit/${id}`);
@@ -47,15 +44,14 @@ export default function BlogPage() {
       setBlogDate(data.blogDate);
       setContent(data.content);
       setCategories(data.categories);
-      setEditId(id); // store current editing blog id
+      setEditId(id); 
     } catch (err) {
       console.error("Error fetching blog:", err);
     }
   }
 
-  // Save edited blog
   async function editBlogs(e) {
-    e.preventDefault(); // prevent reload
+    e.preventDefault();
 
     if (!editId) {
       alert("Please select a blog to edit.");
@@ -89,7 +85,7 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-black min-h-screen text-white">
       <h1 className="text-3xl font-bold mb-6 text-center">All Blogs</h1>
 
       {/* All blogs */}
@@ -98,29 +94,25 @@ export default function BlogPage() {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="border rounded-2xl shadow-md p-4 bg-white hover:shadow-lg transition"
+              className="border border-gray-700 rounded-2xl shadow-md p-4 bg-gray-900 hover:shadow-xl transition"
             >
-              <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-              <p className="text-gray-600 text-sm mb-2">
-                Author: {blog.authorName}
-              </p>
-              <p className="text-gray-500 text-sm mb-4">
-                Date: {blog.blogDate}
-              </p>
-              <p className="text-gray-700 mb-3">{blog.content}</p>
-              <div className="flex justify-evenly">
-                <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+              <h2 className="text-xl font-semibold mb-2 text-white">{blog.title}</h2>
+              <p className="text-gray-400 text-sm mb-2">Author: {blog.authorName}</p>
+              <p className="text-gray-500 text-sm mb-4">Date: {blog.blogDate}</p>
+              <p className="text-gray-300 mb-3">{blog.content}</p>
+              <div className="flex justify-evenly flex-wrap gap-2">
+                <span className="inline-block bg-blue-800 text-white px-3 py-1 rounded-full text-sm">
                   {blog.categories}
                 </span>
                 <button
                   onClick={() => editBlog(blog._id)}
-                  className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-300"
+                  className="bg-blue-700 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => deleteBlog(blog._id)}
-                  className="bg-red-200 text-red-800 px-3 py-1 rounded-full text-sm hover:bg-red-300"
+                  className="bg-red-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-600"
                 >
                   Delete
                 </button>
@@ -132,65 +124,65 @@ export default function BlogPage() {
         <p className="text-center text-gray-500">No blogs found.</p>
       )}
 
-      {/* Edit form */}
+      {/* Edit form modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md relative">
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+          <div className="bg-gray-900 p-6 rounded-lg w-full max-w-md relative shadow-lg">
             <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 font-bold"
+              className="absolute top-2 right-2 text-gray-400 hover:text-white font-bold text-xl"
               onClick={() => setShowModal(false)}
             >
               X
             </button>
 
             <form className="space-y-4" onSubmit={editBlogs}>
-              <h2 className="text-2xl font-semibold text-center mb-4">Edit Blog</h2>
+              <h2 className="text-2xl font-semibold text-center mb-4 text-white">Edit Blog</h2>
 
               {/* Title */}
               <div>
-                <label htmlFor="title" className="block mb-1 text-sm font-medium">Title</label>
+                <label htmlFor="title" className="block mb-1 text-sm font-medium text-gray-200">Title</label>
                 <input
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border border-gray-700 rounded-lg p-2 bg-gray-800 text-white"
                   required
                 />
               </div>
 
               {/* Author */}
               <div>
-                <label htmlFor="authorName" className="block mb-1 text-sm font-medium">Author</label>
+                <label htmlFor="authorName" className="block mb-1 text-sm font-medium text-gray-200">Author</label>
                 <input
                   id="authorName"
                   value={authorName}
                   onChange={(e) => setAuthor(e.target.value)}
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border border-gray-700 rounded-lg p-2 bg-gray-800 text-white"
                   required
                 />
               </div>
 
               {/* Date */}
               <div>
-                <label htmlFor="blogDate" className="block mb-1 text-sm font-medium">Date</label>
+                <label htmlFor="blogDate" className="block mb-1 text-sm font-medium text-gray-200">Date</label>
                 <input
                   type="date"
                   id="blogDate"
                   value={blogDate || ""}
                   onChange={(e) => setBlogDate(e.target.value)}
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border border-gray-700 rounded-lg p-2 bg-gray-800 text-white"
                   required
                 />
               </div>
 
               {/* Content */}
               <div>
-                <label htmlFor="content" className="block mb-1 text-sm font-medium">Content</label>
+                <label htmlFor="content" className="block mb-1 text-sm font-medium text-gray-200">Content</label>
                 <textarea
                   id="content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border border-gray-700 rounded-lg p-2 bg-gray-800 text-white"
                   rows="4"
                   required
                 />
@@ -198,12 +190,12 @@ export default function BlogPage() {
 
               {/* Category */}
               <div>
-                <label htmlFor="categories" className="block mb-1 text-sm font-medium">Category</label>
+                <label htmlFor="categories" className="block mb-1 text-sm font-medium text-gray-200">Category</label>
                 <select
                   id="categories"
                   value={categories}
                   onChange={(e) => setCategories(e.target.value)}
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border border-gray-700 rounded-lg p-2 bg-gray-800 text-white"
                   required
                 >
                   <option value="">Select Category</option>
@@ -216,7 +208,7 @@ export default function BlogPage() {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white font-semibold rounded-lg py-2 hover:bg-blue-700"
+                className="w-full bg-blue-700 text-white font-semibold rounded-lg py-2 hover:bg-blue-600"
               >
                 Update Blog
               </button>
@@ -224,7 +216,6 @@ export default function BlogPage() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
