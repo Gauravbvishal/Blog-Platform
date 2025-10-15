@@ -35,3 +35,9 @@ exports.blogShow = async (req, res, next) => {
     res.status(500).json({ message: "Server error while fetching blogs" });
   }
 };
+
+exports.showBlog=async(req,res,next)=>{
+  const id=req.params.id;
+  const data=await blogs.findOne({_id:id});
+  res.json(data);
+}

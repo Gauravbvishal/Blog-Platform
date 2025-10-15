@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/navigation"; // ✅ Import router
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState("");
+  const router = useRouter(); // ✅ initialize router
 
   // ✅ Fetch blogs (all or by category)
   async function allBlogs(selectedCategory = "") {
@@ -33,7 +34,11 @@ export default function BlogPage() {
     setCategories(selected);
     allBlogs(selected);
   }
-  
+
+  //Show More functionality
+  function singleBlog(id) {
+    router.push(`/users/showBlog/${id}`);
+  }
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white py-10 px-6">
       {/* Header */}
@@ -54,11 +59,10 @@ export default function BlogPage() {
             <label
               key={cat}
               htmlFor={cat}
-              className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${
-                categories === cat
+              className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${categories === cat
                   ? "bg-blue-700 border-blue-500 text-white"
                   : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
-              }`}
+                }`}
             >
               <input
                 type="radio"
@@ -76,11 +80,10 @@ export default function BlogPage() {
           {/* All option */}
           <label
             htmlFor="all"
-            className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${
-              categories === ""
+            className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${categories === ""
                 ? "bg-blue-700 border-blue-500 text-white"
                 : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
-            }`}
+              }`}
           >
             <input
               type="radio"
@@ -125,7 +128,13 @@ export default function BlogPage() {
                   <span className="inline-block bg-blue-800 text-white px-3 py-1 rounded-full text-sm">
                     {blog.categories}
                   </span>
-                  
+                  <button
+                    type="button"
+                    onClick={() => singleBlog(blog._id)}
+                    className="inline-block ml-4 bg-blue-800 text-white px-3 py-1 rounded-full text-sm"
+                  >
+                    Show more
+                  </button>
                 </div>
               </div>
             ))}

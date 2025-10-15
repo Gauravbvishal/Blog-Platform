@@ -31,93 +31,108 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black p-6">
       <form
-        className="bg-gray-900 shadow-2xl rounded-3xl p-8 md:p-10 w-full max-w-md border border-gray-700"
         onSubmit={formSubmit}
+        className="bg-gray-900/70 backdrop-blur-md shadow-2xl rounded-3xl p-8 md:p-10 w-full max-w-md border border-gray-700 hover:border-blue-600 transition-all duration-300"
       >
-        <h2 className="text-3xl font-bold text-center mb-6 text-white">
-          Create a New Blog
+        {/* Header */}
+        <h2 className="text-4xl font-extrabold text-center mb-6 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+          ✍️ Create a New Blog
         </h2>
+        <p className="text-gray-400 text-center mb-8 text-sm">
+          Share your thoughts, stories, and ideas with the world 🌍
+        </p>
 
         {/* Title */}
-        <label htmlFor="title" className="font-medium text-gray-300 mb-1 block">
-          Title
-        </label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter blog title"
-          className="w-full mb-4 border border-gray-600 rounded-xl px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="title" className="font-medium text-gray-300 mb-1 block">
+            Blog Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter blog title..."
+            className="w-full border border-gray-600 rounded-xl px-4 py-2 bg-gray-800/70 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            required
+          />
+        </div>
 
         {/* Author */}
-        <label htmlFor="author" className="font-medium text-gray-300 mb-1 block">
-          Author Name
-        </label>
-        <input
-          type="text"
-          id="author"
-          value={authorName}
-          onChange={(e) => setAuthorName(e.target.value)}
-          placeholder="Enter author name"
-          className="w-full mb-4 border border-gray-600 rounded-xl px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="author" className="font-medium text-gray-300 mb-1 block">
+            Author Name
+          </label>
+          <input
+            type="text"
+            id="author"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            placeholder="Enter your name..."
+            className="w-full border border-gray-600 rounded-xl px-4 py-2 bg-gray-800/70 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            required
+          />
+        </div>
 
         {/* Date */}
-        <label htmlFor="date" className="font-medium text-gray-300 mb-1 block">
-          Date
-        </label>
-        <input
-          type="date"
-          id="date"
-          value={blogDate}
-          onChange={(e) => setDate(e.target.value)}
-          className="w-full mb-4 border border-gray-600 rounded-xl px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="date" className="font-medium text-gray-300 mb-1 block">
+            Blog Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            value={blogDate}
+            onChange={(e) => setDate(e.target.value)}
+            className="w-full border border-gray-600 rounded-xl px-4 py-2 bg-gray-800/70 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            required
+          />
+        </div>
 
         {/* Content */}
-        <label htmlFor="content" className="font-medium text-gray-300 mb-1 block">
-          Content
-        </label>
-        <textarea
-          id="content"
-          rows="5"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Write your blog content here..."
-          className="w-full mb-4 border border-gray-600 rounded-xl px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
-          required
-        />
+        <div className="mb-4">
+          <label htmlFor="content" className="font-medium text-gray-300 mb-1 block">
+            Blog Content
+          </label>
+          <textarea
+            id="content"
+            rows="6"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Write your blog content here..."
+            className="w-full border border-gray-600 rounded-xl px-4 py-2 bg-gray-800/70 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
+            required
+          />
+        </div>
 
         {/* Category */}
-        <label htmlFor="category" className="font-medium text-gray-300 mb-1 block">
-          Category
-        </label>
-        <select
-          id="category"
-          value={categories}
-          onChange={(e) => setCategories(e.target.value)}
-          className="w-full mb-6 border border-gray-600 rounded-xl px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          required
-        >
-          <option value="">Select Category</option>
-          <option value="romantic">Romantic</option>
-          <option value="thriller">Thriller</option>
-          <option value="comedy">Comedy</option>
-          <option value="inspiring">Inspiring</option>
-        </select>
+        <div className="mb-8">
+          <label htmlFor="category" className="font-medium text-gray-300 mb-1 block">
+            Category
+          </label>
+          <select
+            id="category"
+            value={categories}
+            onChange={(e) => setCategories(e.target.value)}
+            className="w-full border border-gray-600 rounded-xl px-4 py-2 bg-gray-800/70 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            required
+          >
+            <option value="">Select Category</option>
+            <option value="Romantic">💖 Romantic</option>
+            <option value="Thriller">🕵️‍♂️ Thriller</option>
+            <option value="Comedy">😂 Comedy</option>
+            <option value="Inspiring">🌟 Inspiring</option>
+          </select>
+        </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 rounded-xl shadow-lg transition-all duration-300"
+          className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:scale-105 text-white font-semibold py-3 rounded-xl shadow-lg transition-all duration-300"
         >
-          Submit Blog
+          🚀 Publish Blog
         </button>
       </form>
     </div>
