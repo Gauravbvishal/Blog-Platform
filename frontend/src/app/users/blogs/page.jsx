@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
-
+   const[categories,setCategories]=useState('');
   // Fetch all blogs when the component loads
   async function allBlogs() {
     try {
@@ -24,21 +24,27 @@ export default function BlogPage() {
     allBlogs();
   }, []);
 
+  async function categoriesFilter(){
+    const response=await fetch(`http://localhost:8000/blogfilter/?categories=${categories}`);
+    const data=await response.json();
+    console.log(data);
+  }
+
   return (
     <div className="p-6 bg-black min-h-screen text-white">
       <h1 className="text-3xl font-bold mb-6 text-center">All Blogs</h1>
       <div className="border border-gray-700 rounded-2xl shadow-md p-4 bg-gray-900 w-45">
         <label for="cars">Filter by Categories:</label>
         <select
-          value="Filter"
+          value={(e)=>setCategories(e.target.value)}
           className="w-full border border-gray-600 rounded-xl   bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           required
         >
           <option value="">Select Category</option>
-          <option value="romantic">Romantic</option>
-          <option value="thriller">Thriller</option>
-          <option value="comedy">Comedy</option>
-          <option value="inspiring">Inspiring</option>
+          <option value={categories}>Romantic</option>
+          <option value={categories}>Thriller</option>
+          <option value={categories}>Comedy</option>
+          <option value={categories}>Inspiring</option>
         </select>
         <label htmlFor="author" className="flex mt-2">Filter by Author :</label>
         <select
