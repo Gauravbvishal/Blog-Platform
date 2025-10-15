@@ -16,12 +16,22 @@ exports.createblog = async (req, res, next) => {
 }
 
 exports.blogShow = async (req, res, next) => {
-    try {
-        const data = await blogs.find();
-        res.json(data);
-        // console.log(data)
+  try {
+    const { category } = req.query; // get category from query string
+   
+    let data;
+
+    if (category) {
+      // ✅ If category is provided, filter by category
+      data = await blogs.find({ categories: category });
+    } else {
+      // ✅ Otherwise, fetch all blogs
+      data = await blogs.find();
     }
-    catch (err) {
-        console.error(err);
-    }
-}
+
+    res.status(200).json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error while fetching blogs" });
+  }
+};
