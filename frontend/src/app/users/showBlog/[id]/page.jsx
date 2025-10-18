@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function ShowBlog() {
-    const { id } = useParams(); // ✅ get blog ID from URL
+    const { id } = useParams();
     const [blog, setBlog] = useState(null);
 
     useEffect(() => {

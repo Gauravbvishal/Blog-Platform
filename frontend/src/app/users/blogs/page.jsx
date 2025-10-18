@@ -60,8 +60,8 @@ export default function BlogPage() {
               key={cat}
               htmlFor={cat}
               className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${categories === cat
-                  ? "bg-blue-700 border-blue-500 text-white"
-                  : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
+                ? "bg-blue-700 border-blue-500 text-white"
+                : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
                 }`}
             >
               <input
@@ -81,8 +81,8 @@ export default function BlogPage() {
           <label
             htmlFor="all"
             className={`cursor-pointer px-4 py-2 rounded-full border transition-all duration-300 ${categories === ""
-                ? "bg-blue-700 border-blue-500 text-white"
-                : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
+              ? "bg-blue-700 border-blue-500 text-white"
+              : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-white"
               }`}
           >
             <input
@@ -125,16 +125,61 @@ export default function BlogPage() {
                   <p className="text-gray-300 mb-4 leading-relaxed line-clamp-3">
                     {blog.content}
                   </p>
-                  <span className="inline-block bg-blue-800 text-white px-3 py-1 rounded-full text-sm">
-                    {blog.categories}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => singleBlog(blog._id)}
-                    className="inline-block ml-4 bg-blue-800 text-white px-3 py-1 rounded-full text-sm"
-                  >
-                    Show more
-                  </button>
+                  <div className="flex wrap">
+                    <span className="bg-blue-800 text-white p-1 rounded-full text-sm">
+                      {blog.categories}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => singleBlog(blog._id)}
+                      className="ml-4 bg-blue-800 text-white p-1 rounded-full text-sm"
+                    >
+                      Show more
+                    </button>
+                    {/* Favourite Blog */}
+                    <button type="" className="ml-3 rounded-full text-sm">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+                    {/* Like button */}
+                    <button type="" className="ml-3 rounded-full text-sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-thumbs-up">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.72l1.38-9a2 2 0 0 0-2-2.28H14z" />
+                        <line x1="7" y1="22" x2="7" y2="11" />
+                      </svg>
+                    </button>
+                    {/* dislike button */}
+                    <button type="" className="ml-3 rounded-full text-sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-thumbs-down">
+                        <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.72l-1.38 9a2 2 0 0 0 2 2.28H10z" />
+                        <line x1="17" y1="2" x2="17" y2="13" />
+                      </svg>
+                    </button>
+                    {/*Share button */}
+                    <button type="button" className="rounded-full text-sm ml-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-share-2">
+                        <circle cx="18" cy="5" r="3" />
+                        <circle cx="6" cy="12" r="3" />
+                        <circle cx="18" cy="19" r="3" />
+                        <path d="M8.6 10.4L15.4 7.6" />
+                        <path d="M8.6 13.6L15.4 16.4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

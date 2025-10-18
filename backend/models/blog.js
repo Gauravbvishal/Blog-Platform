@@ -9,7 +9,7 @@ const blogSchema = new mongoose.Schema({
             default: () => new Date().toISOString().split("T")[0] // yyyy-MM-dd
       },
       content: String,
-      categories: String
+      categories:String
 });
 
 module.exports = mongoose.model('blogs', blogSchema);
